@@ -196,72 +196,69 @@
             color: var(--alert-color);
         }
 
-        /* --- NEW: CIPHER CLUMP / FLUX GRID STYLES --- */
-.grid-container {
-    width: 80px; height: 80px;
-    position: absolute; top: 50%; left: 50%;
-    margin-top: -40px; margin-left: -40px;
-    transform-style: preserve-3d;
-    animation: slow-rotate 20s infinite linear;
-    display: none; /* Hidden by default */
-}
+        .grid-container {
+            width: 80px; height: 80px;
+            position: absolute; top: 50%; left: 50%;
+            margin-top: -40px; margin-left: -40px;
+            transform-style: preserve-3d;
+            animation: slow-rotate 20s infinite linear;
+            display: none;
+        }
 
-@keyframes slow-rotate {
-    from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-    to { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
-}
+        @keyframes slow-rotate {
+            from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+        }
 
-.grid-plane {
-    position: absolute; 
-    width: 80px; 
-    height: 80px;
-    border: 1px solid rgba(0, 240, 255, 0.4);
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(0, 240, 255, 0.01) 50%, rgba(0, 240, 255, 0.08) 100%);
-    backdrop-filter: blur(1px);
-    display: flex; justify-content: center; align-items: center;
-    transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 2s ease;
-    overflow: hidden;
-}
+        .grid-plane {
+            position: absolute; 
+            width: 80px; 
+            height: 80px;
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(0, 240, 255, 0.01) 50%, rgba(0, 240, 255, 0.08) 100%);
+            backdrop-filter: blur(1px);
+            display: flex; justify-content: center; align-items: center;
+            transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 2s ease;
+            overflow: hidden;
+        }
 
-.char-clump {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
-    opacity: 0.4; transition: opacity 0.5s;
-}
+        .char-clump {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
+            opacity: 0.4; transition: opacity 0.5s;
+        }
 
-.char-clump span {
-    font-size: 10px; color: var(--primary-color);
-    text-shadow: 0 0 5px var(--primary-color);
-    animation: micro-jitter 0.2s infinite alternate;
-}
+        .char-clump span {
+            font-size: 10px; color: var(--primary-color);
+            text-shadow: 0 0 5px var(--primary-color);
+            animation: micro-jitter 0.2s infinite alternate;
+        }
 
-@keyframes micro-jitter {
-    from { transform: translate(0, 0); }
-    to { transform: translate(1px, -1px); }
-}
+        @keyframes micro-jitter {
+            from { transform: translate(0, 0); }
+            to { transform: translate(1px, -1px); }
+        }
 
-/* Deconstructed Positions */
-.gp-front  { transform: translateZ(300px) rotateX(90deg); opacity: 0; }
-.gp-back   { transform: rotateY(180deg) translateZ(300px) rotateX(-90deg); opacity: 0; }
-.gp-right  { transform: rotateY(90deg) translateZ(300px) rotateY(90deg); opacity: 0; }
-.gp-left   { transform: rotateY(-90deg) translateZ(300px) rotateY(-90deg); opacity: 0; }
-.gp-top    { transform: rotateX(90deg) translateZ(300px) rotateZ(90deg); opacity: 0; }
-.gp-bottom { transform: rotateX(-90deg) translateZ(300px) rotateZ(-90deg); opacity: 0; }
+        .gp-front  { transform: translateZ(300px) rotateX(90deg); opacity: 0; }
+        .gp-back   { transform: rotateY(180deg) translateZ(300px) rotateX(-90deg); opacity: 0; }
+        .gp-right  { transform: rotateY(90deg) translateZ(300px) rotateY(90deg); opacity: 0; }
+        .gp-left   { transform: rotateY(-90deg) translateZ(300px) rotateY(-90deg); opacity: 0; }
+        .gp-top    { transform: rotateX(90deg) translateZ(300px) rotateZ(90deg); opacity: 0; }
+        .gp-bottom { transform: rotateX(-90deg) translateZ(300px) rotateZ(-90deg); opacity: 0; }
 
-/* Assembled Positions */
-.assembled .gp-front  { transform: translateZ(40px); opacity: 1; }
-.assembled .gp-back   { transform: rotateY(180deg) translateZ(40px); opacity: 1; }
-.assembled .gp-right  { transform: rotateY(90deg) translateZ(40px); opacity: 1; }
-.assembled .gp-left   { transform: rotateY(-90deg) translateZ(40px); opacity: 1; }
-.assembled .gp-top    { transform: rotateX(90deg) translateZ(40px); opacity: 1; }
-.assembled .gp-bottom { transform: rotateX(-90deg) translateZ(40px); opacity: 1; }
+        .assembled .gp-front  { transform: translateZ(40px); opacity: 1; }
+        .assembled .gp-back   { transform: rotateY(180deg) translateZ(40px); opacity: 1; }
+        .assembled .gp-right  { transform: rotateY(90deg) translateZ(40px); opacity: 1; }
+        .assembled .gp-left   { transform: rotateY(-90deg) translateZ(40px); opacity: 1; }
+        .assembled .gp-top    { transform: rotateX(90deg) translateZ(40px); opacity: 1; }
+        .assembled .gp-bottom { transform: rotateX(-90deg) translateZ(40px); opacity: 1; }
 
-.pulse-active .grid-plane { animation: system-handshake 0.8s ease-in-out 3; }
-.pulse-active .char-clump { opacity: 1; }
+        .pulse-active .grid-plane { animation: system-handshake 0.8s ease-in-out 3; }
+        .pulse-active .char-clump { opacity: 1; }
 
-@keyframes system-handshake {
-    0%, 100% { border-color: var(--primary-color); background: rgba(0, 240, 255, 0.05); }
-    50% { border-color: #fff; background: rgba(0, 240, 255, 0.3); transform: scale(1.03); }
-}
+        @keyframes system-handshake {
+            0%, 100% { border-color: var(--primary-color); background: rgba(0, 240, 255, 0.05); }
+            50% { border-color: #fff; background: rgba(0, 240, 255, 0.3); transform: scale(1.03); }
+        }
     </style>
 </head>
 <body>
@@ -271,9 +268,9 @@
     </div>
 
     <div class="loading-screen" id="boot-overlay">
-    <canvas id="matrixCanvas" style="position: absolute; top:0; left:0; width:100%; height:100%;"></canvas>
-    <div id="loading-text" style="position: relative; font-size: 0.8em; letter-spacing: 5px; z-index: 10; background: rgba(5,10,16,0.7); padding: 10px;">SYNCING SENSORS...</div>
-</div>
+        <canvas id="matrixCanvas" style="position: absolute; top:0; left:0; width:100%; height:100%;"></canvas>
+        <div id="loading-text" style="position: relative; font-size: 0.8em; letter-spacing: 5px; z-index: 10; background: rgba(5,10,16,0.7); padding: 10px;">SYNCING SENSORS...</div>
+    </div>
 
     <div class="scanner-container" id="main-ui">
         <header style="display: flex; justify-content: space-between; font-size: 0.6em;">
@@ -288,6 +285,7 @@
             <video id="camera-feed" autoplay playsinline muted></video>
 
             <div class="loading" id="threat-viz">
+                <img id="viz-gif" src="" style="display: none; width: 100%; height: 100%; object-fit: contain; z-index: 10; position: relative;">
                 <div class="core-singularity" id="core"></div>
                 <div class="cube" id="viz-cube">
                     <div class="c-side front"></div><div class="c-side back"></div>
@@ -309,13 +307,13 @@
                     <div class="side f-left"></div><div class="side f-right"></div>
                 </div>
                 <div class="grid-container" id="viz-flux">
-    <div class="grid-plane gp-front"><div class="char-clump"><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span></div></div>
-    <div class="grid-plane gp-back"><div class="char-clump"><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span></div></div>
-    <div class="grid-plane gp-left"><div class="char-clump"><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span></div></div>
-    <div class="grid-plane gp-right"><div class="char-clump"><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span></div></div>
-    <div class="grid-plane gp-top"><div class="char-clump"><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span></div></div>
-    <div class="grid-plane gp-bottom"><div class="char-clump"><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span></div></div>
-</div>
+                    <div class="grid-plane gp-front"><div class="char-clump"><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span></div></div>
+                    <div class="grid-plane gp-back"><div class="char-clump"><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span></div></div>
+                    <div class="grid-plane gp-left"><div class="char-clump"><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span></div></div>
+                    <div class="grid-plane gp-right"><div class="char-clump"><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span></div></div>
+                    <div class="grid-plane gp-top"><div class="char-clump"><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span></div></div>
+                    <div class="grid-plane gp-bottom"><div class="char-clump"><span>𐤈</span><span>𐤀</span><span>𐤐</span><span>𐤉</span><span>𐤔</span><span>𐤕</span><span>𐤈</span><span>𐤀</span><span>𐤐</span></div></div>
+                </div>
             </div>
         </section>
 
@@ -404,46 +402,43 @@
             osc.stop(audioCtx.currentTime + 0.05);
         };
 
-const matrixCanvas = document.getElementById('matrixCanvas');
-const mCtx = matrixCanvas.getContext('2d');
-let matrixActive = false;
+        const matrixCanvas = document.getElementById('matrixCanvas');
+        const mCtx = matrixCanvas.getContext('2d');
+        let matrixActive = false;
 
-function initMatrixRain() {
-    let W = window.innerWidth;
-    let H = window.innerHeight;
-    matrixCanvas.width = W;
-    matrixCanvas.height = H;
+        function initMatrixRain() {
+            let W = window.innerWidth;
+            let H = window.innerHeight;
+            matrixCanvas.width = W;
+            matrixCanvas.height = H;
 
-    const phoenicianChars = [];
-    for (let i = 0x10900; i <= 0x1091F; i++) {
-        phoenicianChars.push(String.fromCodePoint(i));
-    }
-
-    const fontSize = 18; // Increased slightly for better visibility of ancient glyphs
-    let columns = W / fontSize;
-    let drops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-        if (!matrixActive) return; // Stop drawing when screen is hidden
-        
-        mCtx.fillStyle = 'rgba(5, 10, 16, 0.1)'; // Matches your --bg-color
-        mCtx.fillRect(0, 0, W, H);
-
-        mCtx.fillStyle = '#00f0ff'; // Matches your --primary-color
-        mCtx.font = fontSize + 'px Space Mono';
-
-        for (let i = 0; i < drops.length; i++) {
-const text = phoenicianChars[Math.floor(Math.random() * phoenicianChars.length)];            mCtx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-            if (drops[i] * fontSize > H && Math.random() > 0.975) {
-                drops[i] = 0;
+            const phoenicianChars = [];
+            for (let i = 0x10900; i <= 0x1091F; i++) {
+                phoenicianChars.push(String.fromCodePoint(i));
             }
-            drops[i]++;
+
+            const fontSize = 18; 
+            let columns = W / fontSize;
+            let drops = Array(Math.floor(columns)).fill(1);
+
+            function draw() {
+                if (!matrixActive) return; 
+                mCtx.fillStyle = 'rgba(5, 10, 16, 0.1)'; 
+                mCtx.fillRect(0, 0, W, H);
+                mCtx.fillStyle = '#00f0ff'; 
+                mCtx.font = fontSize + 'px Space Mono';
+                for (let i = 0; i < drops.length; i++) {
+                    const text = phoenicianChars[Math.floor(Math.random() * phoenicianChars.length)];
+                    mCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > H && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
         }
-        requestAnimationFrame(draw);
-    }
-    draw();
-}
 
         function runMotionSonar() {
             if (movementIntensity > 1.2) {
@@ -456,13 +451,20 @@ const text = phoenicianChars[Math.floor(Math.random() * phoenicianChars.length)]
         }
 
         const SCAN_LIBRARY = {
-            "FIXENGINESNOW": { status: "ENGINE REPAIR SEQUENCE INITIALIZED", color: "var(--primary-color)", info: "<strong>REMOTE UPLINK:</strong> Command received. Engines set to ONLINE / STANDBY.", shape: "flux", sync: "SYNC // 100%" },
-            "FIXHULLNOW": { status: "HULL INTEGRITY REPAIR INITIALIZED", color: "var(--primary-color)", info: "<strong>REMOTE UPLINK:</strong> Nanite stabilizers deployed. Patching structural fractures.", shape: "intact", sync: "SYNC // 100%" },
-            "EXPLOSIVES DETECTED": { status: "CRITICAL THREAT DETECTED", color: "var(--alert-color)", info: "<strong>PROTOCOL AD-74:</strong> Class-4 controlled molecular shearing markers. Nano-particulate Accelerant [IS-109]. detected.", shape: "cube", sync: "CONFIDENCE // 89%" },
-            "BIOHAZARD": { status: "PATHOGEN DETECTED", color: "var(--alert-color)", info: "<strong>SENSORS ACTIVE:</strong> Airborne biological agent identified. Seal localized vents.", shape: "pyramid", sync: "SYNC // 82%" },
-            "INTACT HULL SEGMENT": { status: "STRUCTURAL SCAN: NOMINAL", color: "var(--alert-color)", info: "<strong>INTEGRITY:</strong> 100%. No stress fractures or surface damage detected.", shape: "intact", sync: "CONFIDENCE // 100%" },
-            "DAMAGED HULL SEGMENT": { status: "STRUCTURAL SCAN: FAILURE", color: "var(--alert-color)", info: "<strong>WARNING:</strong> Compromised hull integrity. Major stress fractures detected.", shape: "broken", sync: "CONFIDENCE // 78%" },
-            "CLEARANCE": { status: "ACCESS GRANTED // LEVEL 4", color: "var(--primary-color)", info: "<strong>ENCRYPTION KEY:</strong> valid. Personnel file AD-909 decrypted.", shape: null, sync: "100% SYNC" },
+"BRAIN INJURY": { status: "MILD TRAUMATIC BRAIN INJURY", color: "var(--alert-color)", info: "<strong>DIAGNOSTIC:</strong> Synaptic disruption detected in the frontal cortex. Patient may experience hazy vision. Implement treatment AD // mTBI xA1032. ", gif: "braininjury.gif", sync: "94% CONFIDENCE" },
+
+"LUNG CONTUSION": { status: "NEURAL PATHOLOGY DETECTED", color: "var(--alert-color)", info: "<strong>DIAGNOSTIC:</strong> Analyzing localized cranial trauma signatures.", gif: "lunginjury.gif", sync: "94% CONFIDENCE" },
+
+"LARYNGEAL TRAUMA": { status: "NEURAL PATHOLOGY DETECTED", color: "var(--alert-color)", info: "<strong>DIAGNOSTIC:</strong> Analyzing localized cranial trauma signatures.", gif: "larynxinjury.gif", sync: "94% CONFIDENCE" },
+
+"HUMERUS FRACTURE": { status: "NEURAL PATHOLOGY DETECTED", color: "var(--alert-color)", info: "<strong>DIAGNOSTIC:</strong> Analyzing localized cranial trauma signatures.", gif: "humerusinjury.gif", sync: "94% CONFIDENCE" },
+
+"METACARPAL FRACTURE": { status: "NEURAL PATHOLOGY DETECTED", color: "var(--alert-color)", info: "<strong>DIAGNOSTIC:</strong> Analyzing localized cranial trauma signatures.", gif: "handinjury.gif", sync: "94% CONFIDENCE" },
+
+"FEMUR FRACTURE": { status: "NEURAL PATHOLOGY DETECTED", color: "var(--alert-color)", info: "<strong>DIAGNOSTIC:</strong> Analyzing localized cranial trauma signatures.", gif: "femurinjury.gif", sync: "94% CONFIDENCE" },
+
+"SEVERED OPTIC NERVE": { status: "NEURAL PATHOLOGY DETECTED", color: "var(--alert-color)", info: "<strong>DIAGNOSTIC:</strong> Analyzing localized cranial trauma signatures.", gif: "eyeinjury.gif", sync: "94% CONFIDENCE" },
+            
             "VOID": { status: "NULL SIGNAL DETECTED", color: "#ffffff", info: "<strong>DATA CORRUPTION:</strong> The scanned matrix contains no readable forensic trail.", shape: "pyramid", sync: "0.0% SYNC" }
         };
 
@@ -519,7 +521,6 @@ const text = phoenicianChars[Math.floor(Math.random() * phoenicianChars.length)]
                 });
             }
 
-            // SIMULATION LOOP FOR EMF UI
             setInterval(() => {
                 const randomStrength = (Math.random() * (70 - 30) + 30).toFixed(2);
                 const randomBearing = Math.floor(Math.random() * 360).toString().padStart(3, '0') + "°";
@@ -543,9 +544,8 @@ const text = phoenicianChars[Math.floor(Math.random() * phoenicianChars.length)]
 
         async function startSystem() {
             try {
-		matrixActive = true;
-        	initMatrixRain();
-
+                matrixActive = true;
+                initMatrixRain();
                 const videoDevices = await codeReader.listVideoInputDevices();
                 const selectedDevice = videoDevices[0].deviceId;
                 codeReader.decodeFromVideoDevice(selectedDevice, 'camera-feed', (result) => {
@@ -565,55 +565,65 @@ const text = phoenicianChars[Math.floor(Math.random() * phoenicianChars.length)]
                 });
                 
                 setTimeout(() => { 
-			matrixActive = false;
-			document.getElementById('boot-overlay').style.display = 'none'; 			document.getElementById('main-ui').style.opacity = '1'; }, 5000);
+                    matrixActive = false;
+                    document.getElementById('boot-overlay').style.display = 'none'; 
+                    document.getElementById('main-ui').style.opacity = '1'; 
+                }, 5000);
             } catch (err) { document.getElementById('loading-text').innerText = "HARDWARE_ERROR"; }
         }
 
         function applyScanResult(data) {
-    window.playSound(880, 'sine', 0.1, 0.1);
-    const status = document.getElementById('status-display');
-    status.innerText = data.status; 
-    status.style.color = data.color;        
-    status.style.borderColor = data.color; 
-    status.style.background = "#000";       
-    
-    document.getElementById('match-pct').innerText = data.sync;
-    document.getElementById('match-pct').style.background = data.color;
-    document.getElementById('info-p').innerHTML = data.info;
+            window.playSound(880, 'sine', 0.1, 0.1);
+            const status = document.getElementById('status-display');
+            status.innerText = data.status; 
+            status.style.color = data.color;        
+            status.style.borderColor = data.color; 
+            status.style.background = "#000";       
+            
+            document.getElementById('match-pct').innerText = data.sync;
+            document.getElementById('match-pct').style.background = data.color;
+            document.getElementById('info-p').innerHTML = data.info;
 
-    if (data.shape) {
-        isThreatActive = true;
-        document.getElementById('camera-feed').style.display = 'none';
-        document.getElementById('threat-viz').style.display = 'block';
-        
-        // Hide all possible shapes first
-        const shapes = ['viz-cube', 'viz-pyramid', 'viz-intact', 'viz-broken', 'viz-flux', 'core'];
-        shapes.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.style.display = 'none';
-        });
+            // Handle GIFs
+            if (data.gif) {
+                isThreatActive = true;
+                document.getElementById('camera-feed').style.display = 'none';
+                document.getElementById('threat-viz').style.display = 'block';
+                const gifImg = document.getElementById('viz-gif');
+                gifImg.src = data.gif;
+                gifImg.style.display = 'block';
 
-        // Show the target shape
-        const targetViz = document.getElementById('viz-' + data.shape);
-        if (targetViz) {
-            targetViz.style.display = 'block';
-
-            // SPECIAL LOGIC FOR FLUX: Trigger the assembly sequence
-            if (data.shape === 'flux') {
-                // Reset classes in case it was scanned before
-                targetViz.classList.remove('assembled', 'pulse-active');
+                // Hide all 3D shapes
+                ['viz-cube', 'viz-pyramid', 'viz-intact', 'viz-broken', 'viz-flux', 'core'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.display = 'none';
+                });
+            }
+            // Handle 3D Shapes
+            else if (data.shape) {
+                isThreatActive = true;
+                document.getElementById('camera-feed').style.display = 'none';
+                document.getElementById('threat-viz').style.display = 'block';
+                document.getElementById('viz-gif').style.display = 'none';
                 
-                // Force a reflow and then add the classes with the timing from your original code
-                setTimeout(() => { targetViz.classList.add('assembled'); }, 100);
-                setTimeout(() => { targetViz.classList.add('pulse-active'); }, 3200);
+                const shapes = ['viz-cube', 'viz-pyramid', 'viz-intact', 'viz-broken', 'viz-flux', 'core'];
+                shapes.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.display = 'none';
+                });
+
+                const targetViz = document.getElementById('viz-' + data.shape);
+                if (targetViz) {
+                    targetViz.style.display = 'block';
+                    if (data.shape === 'flux') {
+                        targetViz.classList.remove('assembled', 'pulse-active');
+                        setTimeout(() => { targetViz.classList.add('assembled'); }, 100);
+                        setTimeout(() => { targetViz.classList.add('pulse-active'); }, 3200);
+                    }
+                }
+                if (data.shape === 'cube') document.getElementById('core').style.display = 'block';
             }
         }
-        
-        // Show core only for the cube
-        if (data.shape === 'cube') document.getElementById('core').style.display = 'block';
-    }
-}
 
         document.getElementById('reset-btn').addEventListener('mousedown', () => window.playTap(650, 0.06));
         document.getElementById('reset-btn').addEventListener('mouseup', () => window.playTap(500, 0.04));
@@ -623,6 +633,8 @@ const text = phoenicianChars[Math.floor(Math.random() * phoenicianChars.length)]
             document.getElementById('decoded-output').innerText = "DATA EXTRACTION PENDING";
             document.getElementById('camera-feed').style.display = 'block';
             document.getElementById('threat-viz').style.display = 'none';
+            document.getElementById('viz-gif').style.display = 'none';
+            document.getElementById('viz-gif').src = "";
             
             const status = document.getElementById('status-display');
             status.innerText = "SYSTEM PURGED";
@@ -635,7 +647,8 @@ const text = phoenicianChars[Math.floor(Math.random() * phoenicianChars.length)]
             
             setTimeout(() => { 
                 status.innerText = "AWAITING OPTICAL INPUT"; 
-                status.style.background = "#000"; }, 600);
+                status.style.background = "#000"; 
+            }, 600);
         });
 
         document.getElementById('connect-btn').addEventListener('click', () => { 
