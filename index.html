@@ -612,57 +612,70 @@
         }
 
         function applyScanResult(data) {
-            window.playSound(880, 'sine', 0.1, 0.1);
-            const status = document.getElementById('status-display');
-            status.innerText = data.status; 
-            status.style.color = data.color;        
-            status.style.borderColor = data.color; 
-            status.style.background = "#000";       
-            
-            document.getElementById('match-pct').innerText = data.sync;
-            document.getElementById('match-pct').style.background = data.color;
-            document.getElementById('info-p').innerHTML = data.info;
+    if (isThreatActive) return; // Prevent overlapping scans
+    isThreatActive = true;
 
-            // Handle GIFs
-            if (data.gif) {
-                isThreatActive = true;
-                document.getElementById('camera-feed').style.display = 'none';
-                document.getElementById('threat-viz').style.display = 'block';
-                const gifImg = document.getElementById('viz-gif');
-                gifImg.src = data.gif;
-                gifImg.style.display = 'block';
+    const status = document.getElementById('status-display');
+    const info = document.getElementById('info-p');
+    const matchPct = document.getElementById('match-pct');
+    const gifImg = document.getElementById('viz-gif');
 
-                // Hide all 3D shapes
-                ['viz-cube', 'viz-pyramid', 'viz-intact', 'viz-broken', 'viz-flux', 'core'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.style.display = 'none';
-                });
-            }
-            // Handle 3D Shapes
-            else if (data.shape) {
-                isThreatActive = true;
-                document.getElementById('camera-feed').style.display = 'none';
-                document.getElementById('threat-viz').style.display = 'block';
-                document.getElementById('viz-gif').style.display = 'none';
-                
-                const shapes = ['viz-cube', 'viz-pyramid', 'viz-intact', 'viz-broken', 'viz-flux', 'core'];
-                shapes.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.style.display = 'none';
-                });
+    // --- PHASE 1: THE HOLD ---
+    status.innerText = "ANALYZING BIOMETRIC DATA...";
+    status.style.color = "var(--warning-color)";
+    status.style.borderColor = "var(--warning-color)";
+    window.playSound(440, 'square', 0.2, 0.05); // Initial "blip"
 
-                const targetViz = document.getElementById('viz-' + data.shape);
-                if (targetViz) {
-                    targetViz.style.display = 'block';
-                    if (data.shape === 'flux') {
-                        targetViz.classList.remove('assembled', 'pulse-active');
-                        setTimeout(() => { targetViz.classList.add('assembled'); }, 100);
-                        setTimeout(() => { targetViz.classList.add('pulse-active'); }, 3200);
-                    }
-                }
-                if (data.shape === 'cube') document.getElementById('core').style.display = 'block';
-            }
+    let progress = 0;
+    const interval = setInterval(() => {
+        // Use a smaller increment for a longer, more dramatic hold
+        progress += Math.random() * 3; 
+        if (progress > 100) progress = 100;
+        
+        matchPct.innerText = Math.floor(progress) + "% SYNCING";
+
+        // Generate a string of 8 random Phoenician characters
+        let decodeString = "";
+        for(let i = 0; i < 8; i++) {
+            decodeString += phoenixChars[Math.floor(Math.random() * phoenixChars.length)];
         }
+        
+        // Update the info text with the "Ancient" signature
+        info.innerHTML = "DECRYPTING ORGANIC SIGNATURE: <span style='font-size:1.2em;'>" + decodeString + "</span>";
+        
+        if (Math.random() > 0.8) window.playTap(800 + (progress * 2), 0.02);
+
+        if (progress >= 100) {
+            clearInterval(interval);
+            revealResult();
+        }
+    }, 200); // 200ms interval for a steady, rhythmic decode
+
+    // --- PHASE 2: THE REVEAL ---
+    function revealResult() {
+        window.playSound(880, 'sine', 0.3, 0.1); // "Success" chime
+        
+        status.innerText = data.status; 
+        status.style.color = data.color;        
+        status.style.borderColor = data.color; 
+        
+        matchPct.innerText = data.sync;
+        matchPct.style.background = data.color;
+        info.innerHTML = data.info;
+
+        if (data.gif) {
+            document.getElementById('camera-feed').style.display = 'none';
+            document.getElementById('threat-viz').style.display = 'block';
+            gifImg.src = data.gif;
+            gifImg.style.display = 'block';
+
+            ['viz-cube', 'viz-pyramid', 'viz-intact', 'viz-broken', 'viz-flux', 'core'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+        }
+    }
+}
 
         document.getElementById('reset-btn').addEventListener('mousedown', () => window.playTap(650, 0.06));
         document.getElementById('reset-btn').addEventListener('mouseup', () => window.playTap(500, 0.04));
