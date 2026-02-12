@@ -271,6 +271,26 @@
             50% { opacity: 1; box-shadow: 0 0 10px var(--primary-color); }
             100% { opacity: 0.6; }
         }
+
+#viz-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This makes it fill the camera box perfectly */
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+}
+
+#threat-viz {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
     </style>
 </head>
 <body>
