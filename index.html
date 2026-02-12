@@ -259,6 +259,18 @@
             0%, 100% { border-color: var(--primary-color); background: rgba(0, 240, 255, 0.05); }
             50% { border-color: #fff; background: rgba(0, 240, 255, 0.3); transform: scale(1.03); }
         }
+
+        /* --- HEART RATE SPECIFIC ANIMATION --- */
+        #mag-bar {
+            transition: width 0.8s ease-in-out;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; box-shadow: 0 0 10px var(--primary-color); }
+            100% { opacity: 0.6; }
+        }
     </style>
 </head>
 <body>
@@ -320,14 +332,14 @@
         <main>
             <div id="mag-panel">
                 <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,240,255,0.3); margin-bottom: 5px;">
-                    <span>EMF_FIELD_STRENGTH</span>
-                    <span id="mag-bearing">---°</span>
+                    <span>VITAL_SIGN_MONITOR</span>
+                    <span id="mag-bearing">O2 SAT: NOMINAL</span>
                 </div>
                 <div style="display: flex; gap: 8px; align-items: center;">
                     <div style="flex: 1; height: 8px; background: rgba(0, 240, 255, 0.1); position: relative; overflow: hidden; border: 1px solid rgba(0,240,255,0.2);">
-                        <div id="mag-bar" style="width: 0%; height: 100%; background: var(--primary-color); transition: width 0.1s;"></div>
+                        <div id="mag-bar" style="width: 0%; height: 100%; background: var(--primary-color);"></div>
                     </div>
-                    <span id="mag-uT" style="min-width: 60px; text-align: right;">0.00 uT</span>
+                    <span id="mag-uT" style="min-width: 60px; text-align: right;">72 BPM</span>
                 </div>
             </div>
 
@@ -372,6 +384,7 @@
         const phoenixChars = ["\uD802\uDD00", "\uD802\uDD01", "\uD802\uDD02", "\uD802\uDD03", "\uD802\uDD04", "\uD802\uDD05", "\uD802\uDD06", "\uD802\uDD07", "\uD802\uDD08"];
         let isThreatActive = false;
         let movementIntensity = 0;
+        let currentBPM = 72;
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
@@ -474,11 +487,21 @@
         const uiContainer = document.getElementById('main-ui');
         const videoFeed = document.getElementById('camera-feed');
 
-        function updateMagUI(strength) {
-            magUT.innerText = strength + " uT";
-            const percent = Math.min((strength / 100) * 100, 100);
+        /* --- UPDATED HEART RATE LOGIC --- */
+        function updateHeartRate() {
+            let drift = (Math.random() - 0.5) * 4; 
+            currentBPM += drift;
+            
+            if (currentBPM < 80) currentBPM = 80;
+            if (currentBPM > 100) currentBPM = 120;
+
+            const bpmDisplay = Math.round(currentBPM);
+            magUT.innerText = bpmDisplay + " BPM";
+            
+            // Map 60-100 range to 0-100% bar width
+            const percent = ((currentBPM - 60) / 40) * 100;
             magBar.style.width = percent + "%";
-            magBar.style.background = (strength > 80) ? 'var(--alert-color)' : 'var(--primary-color)';
+            magBar.style.background = (currentBPM > 90) ? 'var(--alert-color)' : 'var(--primary-color)';
         }
 
         function triggerRandomFlicker() {
@@ -521,12 +544,8 @@
                 });
             }
 
-            setInterval(() => {
-                const randomStrength = (Math.random() * (70 - 30) + 30).toFixed(2);
-                const randomBearing = Math.floor(Math.random() * 360).toString().padStart(3, '0') + "°";
-                updateMagUI(randomStrength);
-                magBearing.innerText = randomBearing;
-            }, 200);
+            // Updated from 200ms random uT to 1s drifting BPM
+            setInterval(updateHeartRate, 1000);
         }
 
         function updateUI() {
