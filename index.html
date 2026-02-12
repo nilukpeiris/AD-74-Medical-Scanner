@@ -513,13 +513,13 @@
             currentBPM += drift;
             
             if (currentBPM < 80) currentBPM = 80;
-            if (currentBPM > 100) currentBPM = 120;
+            if (currentBPM > 120) currentBPM = 120;
 
             const bpmDisplay = Math.round(currentBPM);
             magUT.innerText = bpmDisplay + " BPM";
             
             // Map 60-100 range to 0-100% bar width
-            const percent = ((currentBPM - 60) / 40) * 100;
+            const percent = ((currentBPM - 60) / 60) * 100;
             magBar.style.width = percent + "%";
             magBar.style.background = (currentBPM > 90) ? 'var(--alert-color)' : 'var(--primary-color)';
         }
